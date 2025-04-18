@@ -74,3 +74,7 @@ main {
     transform: translateY(5%);
     box-shadow: none;
 }
+
+.new-dice-btn:hover {
+    background-color: rgb(195, 17, 53);
+}

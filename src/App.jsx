@@ -1,9 +1,13 @@
 import "./App.css";
 import { useState } from "react";
 import { nanoid } from "nanoid";
+import Confetti from "react-confetti";
 
 function App() {
-  const [dice, setDice] = useState(generateAllNewDice());
+  const [dice, setDice] = useState(() => generateAllNewDice());
+
+  const gameWon = dice.every(die => die.isHeld) && 
+  dice.every(die => die.value === dice[0].value);
 
   function generateAllNewDice() {
     return new Array(10).fill(0).map(() => ({
@@ -18,13 +22,16 @@ function App() {
   });
 
   function rollDice() {
+    if (gameWon) {
+      setDice(() => generateAllNewDice())
+    }
     setDice(oldDice => {
       return oldDice.map(die => !die.isHeld ? {...die, value: Math.ceil(Math.random() * 6)} : die)
     });
   }
 
   function hold(id) {
-    console.log(id)
+    //console.log(id)
     setDice(oldDice => {
       return oldDice.map(die => die.id === id ? {...die, isHeld: !die.isHeld} : die)
     })
@@ -32,6 +39,7 @@ function App() {
 
   return (
     <>
+    {gameWon && <Confetti />}
       <main>
         <div className="game-info">
           <h1>Tenzies</h1>
@@ -41,7 +49,7 @@ function App() {
         <div className="dice-wrapper">{diceElements}</div>
 
         <button className="new-dice-btn" onClick={rollDice}>
-          Roll Dice
+          {gameWon ? "New Game" : "Roll Dice"}
         </button>
       </main>
     </>
