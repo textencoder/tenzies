@@ -6,6 +6,7 @@ import Confetti from "react-confetti";
 function App() {
   const [dice, setDice] = useState(() => generateAllNewDice());
   const buttonRef = useRef(null);
+  const [startTime, setStartTime] = useState(Date.now())
 
   const gameWon =
     dice.every((die) => die.isHeld) &&
@@ -13,6 +14,7 @@ function App() {
 
   useEffect(() => {
     if (gameWon) {
+      console.log("You won in " + ((Date.now() - startTime) / 1000).toFixed(2) + " seconds")
       buttonRef.current.focus()
     }
   }, [gameWon])
@@ -40,6 +42,7 @@ function App() {
   function rollDice() {
     if (gameWon) {
       setDice(() => generateAllNewDice());
+      setStartTime(Date.now())
     }
     setDice((oldDice) => {
       return oldDice.map((die) =>
@@ -73,6 +76,7 @@ function App() {
             Roll until all dice are the same. Click each die to freeze it at its
             current value between rolls.
           </p>
+          <h3 style={gameWon ? {visibility:"visible"} : {visibility:"hidden"}}>You won in {((Date.now() - startTime) / 1000).toFixed(2)} seconds!</h3>
         </div>
 
         <div className="dice-wrapper">{diceElements}</div>
