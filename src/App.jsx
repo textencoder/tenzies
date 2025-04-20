@@ -76,7 +76,7 @@ function App() {
             Roll until all dice are the same. Click each die to freeze it at its
             current value between rolls.
           </p>
-          <h3 style={gameWon ? {visibility:"visible"} : {visibility:"hidden"}}>You won in {((Date.now() - startTime) / 1000).toFixed(2)} seconds!</h3>
+          <h3 style={gameWon ? {visibility:"visible"} : {visibility:"hidden"}}>You won in <strong>{((Date.now() - startTime) / 1000).toFixed(2)}</strong> seconds!</h3>
         </div>
 
         <div className="dice-wrapper">{diceElements}</div>
