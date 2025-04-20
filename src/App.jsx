@@ -98,8 +98,12 @@ function Die(props) {
       className="die"
       style={
         props.isHeld
-          ? { backgroundColor: "#59e391" }
-          : { backgroundColor: "white" }
+          ? { backgroundColor: "#59e391",
+            boxShadow: "0 5px 0 rgb(58, 163, 91)"
+           }
+          : { backgroundColor: "white",
+            boxShadow: "0 5px 0 rgb(200, 200, 200)"
+           }
       }
     >
       {props.value}
