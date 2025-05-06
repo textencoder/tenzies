@@ -63,7 +63,7 @@ function App() {
   return (
     <>
       <main>
-      {gameWon && <Confetti />}
+      {gameWon && <Confetti recycle={false} numberOfPieces={400} />}
       <div
         aria-live="polite"
         className="sr-only"
